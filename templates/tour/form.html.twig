@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ tour is defined and tour.id ? 'Modifier le Tour' : 'Ajouter un Tour' }}
+{% endblock %}
+
+{% block body %}
+<h1 class="title is-3 mb-4">
+    {{ tour is defined and tour.id ? 'Modifier le Tour' : 'Ajouter un Tour' }}
+</h1>
+
+{{ form_start(form, {'attr': {'class': 'box'}}) }}
+
+<div class="field">
+    {{ form_label(form.title) }}
+    <div class="control">
+        {{ form_widget(form.title) }}
+    </div>
+    <p class="help is-danger">{{ form_errors(form.title) }}</p>
+</div>
+
+<div class="field">
+    {{ form_label(form.description) }}
+    <div class="control">
+        {{ form_widget(form.description) }}
+    </div>
+    <p class="help is-danger">{{ form_errors(form.description) }}</p>
+</div>
+
+<div class="field">
+    {{ form_label(form.price) }}
+    <div class="control">
+        {{ form_widget(form.price) }}
+    </div>
+    <p class="help is-danger">{{ form_errors(form.price) }}</p>
+</div>
+
+<div class="field">
+    {{ form_label(form.destination) }}
+    <div class="control">
+        <div class="select is-fullwidth">
+            {{ form_widget(form.destination) }}
+        </div>
+    </div>
+    <p class="help is-danger">{{ form_errors(form.destination) }}</p>
+</div>
+
+<div class="field mt-4">
+    <div class="control">
+        <button class="button is-primary">{{ tour is defined and tour.id ? 'Modifier' : 'Ajouter' }}</button>
+        <a href="{{ path('tour_list') }}" class="button is-light">Annuler</a>
+    </div>
+</div>
+
+{{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,8 @@
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+
+# Routes dev
+_errors:
+    resource: '@FrameworkBundle/Resources/config/routing/errors.php'
+    prefix: /_error

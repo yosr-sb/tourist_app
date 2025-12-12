@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="columns is-centered">
+    <div class="column is-8-tablet is-6-desktop">
+        <div class="card" style="border-radius: 15px; box-shadow: 0 12px 30px rgba(0,0,0,0.15); overflow: hidden;">
+            <div class="card-content" style="background: linear-gradient(135deg, #e0f7fa, #ffffff); padding: 2rem;">
+                <h1 class="title has-text-centered has-text-primary mb-5">
+                    <span class="icon"><i class="fas fa-calendar-check"></i></span>
+                    Nouvelle Réservation
+                </h1>
+               
+                {{ form_start(form) }}
+
+                <div class="field">
+                    {{ form_label(form.nomClient) }}
+                    <div class="control has-icons-left">
+                        {{ form_widget(form.nomClient, {'attr': {'class': 'input is-rounded'}}) }}
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </div>
+                    <p class="help is-danger">{{ form_errors(form.nomClient) }}</p>
+                </div>
+
+                <div class="field">
+                    {{ form_label(form.email) }}
+                    <div class="control has-icons-left">
+                        {{ form_widget(form.email, {'attr': {'class': 'input is-rounded'}}) }}
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </div>
+                    <p class="help is-danger">{{ form_errors(form.email) }}</p>
+                </div>
+
+                <div class="field">
+                    {{ form_label(form.tour) }}
+                    <div class="control">
+                        <div class="select is-fullwidth is-rounded">
+                            {{ form_widget(form.tour) }}
+                        </div>
+                    </div>
+                    <p class="help is-danger">{{ form_errors(form.tour) }}</p>
+                </div>
+
+                <div class="field">
+                    {{ form_label(form.dateReservation) }}
+                    <div class="control has-icons-left">
+                        {{ form_widget(form.dateReservation, {'attr': {'class': 'input is-rounded'}}) }}
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-calendar-alt"></i>
+                        </span>
+                    </div>
+                    <p class="help is-danger">{{ form_errors(form.dateReservation) }}</p>
+                </div>
+
+                <div class="field">
+                    {{ form_label(form.nombrePersonnes) }}
+                    <div class="control has-icons-left">
+                        {{ form_widget(form.nombrePersonnes, {'attr': {'class': 'input is-rounded', 'min': 1}}) }}
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-users"></i>
+                        </span>
+                    </div>
+                    <p class="help is-danger">{{ form_errors(form.nombrePersonnes) }}</p>
+                </div>
+
+                <div class="field is-grouped is-grouped-right mt-4">
+                    <div class="control">
+                        <button type="submit" class="button has-text-white" style="background: linear-gradient(to right, #00c6ff, #0072ff); border-radius: 25px;">
+                            <span class="icon"><i class="fas fa-check"></i></span>
+                            <span>Confirmer</span>
+                        </button>
+                    </div>
+                    <div class="control">
+                        <a href="{{ path('reservation_list') }}" class="button is-light is-rounded">
+                            <span class="icon"><i class="fas fa-times"></i></span>
+                            <span>Annuler</span>
+                        </a>
+                    </div>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

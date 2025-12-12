@@ -1,0 +1,56 @@
+{# templates/destination/form.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ destination is defined and destination.id ? 'Modifier la destination' : 'Ajouter une destination' }}
+{% endblock %}
+
+{% block body %}
+<h1 class="title is-3 mb-4">
+    {{ destination is defined and destination.id ? 'Modifier la destination' : 'Ajouter une destination' }}
+</h1>
+
+{{ form_start(form, {'attr': {'class': 'box'}}) }}
+
+<div class="field">
+    {{ form_label(form.nom, 'Nom') }}
+    <div class="control">
+        {{ form_widget(form.nom, {'attr': {'class': 'input'}}) }}
+    </div>
+    <p class="help is-danger">{{ form_errors(form.nom) }}</p>
+</div>
+
+<div class="field">
+    {{ form_label(form.description, 'Description') }}
+    <div class="control">
+        {{ form_widget(form.description, {'attr': {'class': 'textarea'}}) }}
+    </div>
+    <p class="help is-danger">{{ form_errors(form.description) }}</p>
+</div>
+
+<div class="field">
+    {{ form_label(form.image, 'Image') }}
+    <div class="control">
+        {{ form_widget(form.image, {'attr': {'class': 'input'}}) }}
+    </div>
+    <p class="help is-danger">{{ form_errors(form.image) }}</p>
+</div>
+
+{% if destination is defined and destination.image %}
+    <div class="field">
+        <label class="label">Image actuelle</label>
+        <figure class="image is-128x128">
+            <img src="/uploads/{{ destination.image }}" alt="Image de {{ destination.nom }}">
+        </figure>
+    </div>
+{% endif %}
+
+<div class="field mt-4">
+    <div class="control">
+        <button class="button is-primary">{{ destination is defined and destination.id ? 'Modifier' : 'Ajouter' }}</button>
+        <a href="{{ path('destination_list') }}" class="button is-light">Annuler</a>
+    </div>
+</div>
+
+{{ form_end(form) }}
+{% endblock %}

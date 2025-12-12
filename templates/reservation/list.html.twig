@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1 class="title has-text-centered has-text-primary mb-5">
+    <span class="icon"><i class="fas fa-list"></i></span>
+    Liste des Réservations
+</h1>
+
+<div class="buttons" style="margin-bottom: 1.5rem;">
+    <a class="button is-primary is-rounded" href="{{ path('reservation_add') }}">
+        <span class="icon"><i class="fas fa-plus-circle"></i></span>
+        <span>Nouvelle réservation</span>
+    </a>
+</div>
+
+<table class="table is-fullwidth is-hoverable is-striped">
+    <thead style="background-color: #00c6ff; color: white;">
+        <tr>
+            <th>Client</th>
+            <th>Tour</th>
+            <th>Date</th>
+            <th>Personnes</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in reservations %}
+            <tr>
+                <td>{{ r.nomClient }}</td>
+                <td>{{ r.tour.title }}</td>
+                <td>{{ r.dateReservation ? r.dateReservation|date('d/m/Y H:i') : '' }}</td>
+                <td>{{ r.nombrePersonnes }}</td>
+                <td>
+                    <form action="{{ path('reservation_delete', {'id': r.id}) }}" method="post" style="display:inline;">
+                        <button class="button is-danger is-small is-rounded" type="submit" onclick="return confirm('Supprimer cette réservation ?');">
+                            <span class="icon"><i class="fas fa-trash-alt"></i></span>
+                            <span>Supprimer</span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5" class="has-text-centered">Aucune réservation.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+

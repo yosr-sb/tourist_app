@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Accueil{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <style>
+        /* Navbar custom */
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-item.is-active {
+            background-color: #00d1b2;
+            color: white;
+            border-radius: 5px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 1rem;
+            background-color: #f5f5f5;
+            text-align: center;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar is-light" role="navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{{ path('dashboard') }}">Accueil</a>
+    </div>
+    <div class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="{{ path('destination_list') }}">Destinations</a>
+            <a class="navbar-item" href="{{ path('tour_list') }}">Tours</a>
+            <a class="navbar-item" href="{{ path('reservation_list') }}">Réservations</a>
+        </div>
+    </div>
+</nav>
+
+<section class="section">
+    <div class="container">
+        {# Flash messages #}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="notification is-primary">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        {# Content of the page #}
+        {% block body %}{% endblock %}
+    </div>
+</section>
+
+<footer>
+    &copy; {{ "now"|date("Y") }} Accueil. Tous droits réservés.
+</footer>
+
+</body>
+</html>
+

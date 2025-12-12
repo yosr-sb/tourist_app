@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Tours{% endblock %}
+
+{% block body %}
+<h1 class="title is-3 has-text-centered mb-6">Nos Tours</h1>
+
+<div class="columns is-multiline">
+    {% for t in tours %}
+        <div class="column is-one-third">
+            <div class="card">
+                {% if t.destination.image %}
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img src="/uploads/{{ t.destination.image }}" alt="Image de {{ t.destination.nom }}">
+                        </figure>
+                    </div>
+                {% endif %}
+                <div class="card-content">
+                    <p class="title is-5">{{ t.title }}</p>
+                    <p class="subtitle is-6 has-text-grey">{{ t.destination.nom }}</p>
+                    <div class="content">
+                        {{ t.description|length > 100 ? t.description[:100] ~ '...' : t.description }}
+                        <br>
+                        <strong class="has-text-primary">{{ t.price|number_format(2, '.', ',') }} €</strong>
+                    </div>
+                </div>
+                <footer class="card-footer">
+                    <a href="{{ path('tour_edit', {id: t.id}) }}" class="card-footer-item has-text-info">Éditer</a>
+                    <a href="{{ path('tour_delete', {id: t.id}) }}" class="card-footer-item has-text-danger" onclick="return confirm('Supprimer ce tour ?')">Supprimer</a>
+                </footer>
+            </div>
+        </div>
+    {% else %}
+        <div class="column">
+            <p class="notification is-warning has-text-centered">Aucun tour disponible pour le moment.</p>
+        </div>
+    {% endfor %}
+</div>
+
+<a class="button is-primary mt-5" href="{{ path('tour_add') }}">Ajouter un nouveau tour</a>
+{% endblock %}
